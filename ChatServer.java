@@ -131,21 +131,22 @@ public class ChatServer
             String input = dataInputStream.readUTF();
 
             JSONObject jsonObject = new JSONObject(input);
-            String username = jsonObject.getString("username");
+//            String username = jsonObject.getString("username");
             String message = jsonObject.getString("message");
-            String destination = jsonObject.getString("destination");
+//            String destination = jsonObject.getString("destination");
              
 //            String output = listCommand(message);
-            System.out.println("request :" + input);
+            System.out.println(hostName + " " + input);
             JSONArray array = new JSONArray();
             JSONObject send = new JSONObject();
             
-            Socket socketOnline = newmap.get(destination);
+//            Socket socketOnline = newmap.get(destination);
+Socket socketOnline = null;
             System.out.println(newmap);
             
             if (socketOnline != null)
             {
-              send.put("username", username);
+//              send.put("username", username);
 //              array.put(message);
               send.put("message", message);
 //              array.getJSONArray(0);
@@ -159,8 +160,8 @@ public class ChatServer
             }
             else
             {
-              send.put("username", "Server");
-              array.put("" + destination + " not online");
+//              send.put("username : ", "Server");
+//              array.put("" + destination + " not online");
               send.put("message", array);
               dataOutputStream.writeUTF(String.valueOf(send));
               dataOutputStream.flush();

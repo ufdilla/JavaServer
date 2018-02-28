@@ -1,11 +1,16 @@
-package socket4;
+package socket;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.io.Writer;
 
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -97,17 +102,23 @@ public class ChatServer
       String hostName = myClientSocket.getInetAddress().getHostName();
       System.out.println("Accepted Client - " + hostName);
 
+//      client log in use username
       try
       {
         BufferedReader in = new BufferedReader(new InputStreamReader(myClientSocket.getInputStream()));
+//          OutputStream listUser = null;
+//        Writer out = new BufferedWriter(new OutputStreamWriter(listUser));        
         String MyName = in.readLine();
         newmap.put(MyName, myClientSocket);
-        System.out.println(newmap);
+          System.out.println("myClientSocket " + myClientSocket);
+        System.out.println("newmap " + newmap);
       }
       catch (IOException ex)
       {
         System.out.println(ex);
       }
+      
+//      client input request messages within destination client
       try
       {
         DataInputStream dataInputStream = new DataInputStream(myClientSocket.getInputStream());
